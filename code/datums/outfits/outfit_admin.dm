@@ -92,7 +92,7 @@
 	l_hand = /obj/item/tank/internals/oxygen/red
 
 	backpack_contents = list(
-		/obj/item/storage/box/survival_syndi = 1,
+		/obj/item/storage/box/survival_syndie = 1,
 		/obj/item/gun/projectile/automatic/pistol = 1,
 		/obj/item/ammo_box/magazine/m10mm = 1,
 		/obj/item/crowbar/red = 1,
@@ -292,7 +292,8 @@
 		/obj/item/flashlight/seclite,
 		/obj/item/grenade/barrier,
 		/obj/item/melee/energy/sword/saber,
-		/obj/item/shield/energy
+		/obj/item/shield/energy,
+		/obj/item/soap/ds
 	)
 
 	cybernetic_implants = list(
@@ -1607,7 +1608,8 @@
 	H.update_fhair()
 	H.update_dna()
 
-	H.wear_mask.adjustmask(H) // push it back on the head
+	var/obj/item/clothing/mask/worn_mask = H.wear_mask
+	worn_mask.adjustmask(H) // push it back on the head
 	equip_item(H, /obj/item/clothing/mask/cigarette/cigar, ITEM_SLOT_MASK) // get them their cigar
 	if(istype(H.glasses, /obj/item/clothing/glasses)) // this is gonna be always true
 		var/obj/item/clothing/glasses/glassass = H.glasses

@@ -70,12 +70,12 @@
 /datum/gear/hat/capcsec
 	display_name = "Security cap, corporate"
 	path = /obj/item/clothing/head/soft/sec/corp
-	allowed_roles = list("Head of Security", "Warden", "Security Officer")
+	allowed_roles = list("Head of Security", "Warden", "Security Officer", "Detective")
 
 /datum/gear/hat/capsec
 	display_name = "Security cap"
 	path = /obj/item/clothing/head/soft/sec
-	allowed_roles = list("Head of Security", "Warden", "Security Officer")
+	allowed_roles = list("Head of Security", "Warden", "Security Officer", "Detective")
 
 /datum/gear/hat/capjanigrey
 	display_name = "Cap, janitor grey"
@@ -146,7 +146,7 @@
 /datum/gear/hat/cowboyhat/sec
 	display_name = "Cowboy hat, security"
 	path = /obj/item/clothing/head/cowboyhat/sec
-	allowed_roles = list("Head of Security", "Warden", "Security Officer")
+	allowed_roles = list("Head of Security", "Warden", "Security Officer", "Detective")
 
 /datum/gear/hat/beret_purple
 	display_name = "Beret, purple"
@@ -264,3 +264,7 @@
 /datum/gear/hat/capsolgov
 	display_name = "Cap, Sol Gov"
 	path = /obj/item/clothing/head/soft/solgov
+
+/datum/gear/hat/cool_bandana
+	display_name = "Badass Bandana"
+	path = /obj/item/clothing/head/cool_bandana

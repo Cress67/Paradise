@@ -342,11 +342,13 @@
 	ADD_TRAIT(owner, TRAIT_PACIFISM, "hippocraticOath")
 	var/datum/atom_hud/H = GLOB.huds[DATA_HUD_MEDICAL_ADVANCED]
 	H.add_hud_to(owner)
+	owner.permanent_huds |= H
 	return ..()
 
 /datum/status_effect/hippocratic_oath/on_remove()
 	REMOVE_TRAIT(owner, TRAIT_PACIFISM, "hippocraticOath")
 	var/datum/atom_hud/H = GLOB.huds[DATA_HUD_MEDICAL_ADVANCED]
+	owner.permanent_huds ^= H
 	H.remove_hud_from(owner)
 
 /datum/status_effect/hippocratic_oath/tick()
@@ -411,10 +413,10 @@
 			L.adjustBruteLoss(-3.5)
 			L.adjustFireLoss(-3.5)
 			heal_points--
-	else if(isanimal(L))
-		var/mob/living/simple_animal/SM = L
-		if(SM.health < SM.maxHealth)
-			SM.adjustHealth(-3.5)
+	else if(isanimal_or_basicmob(L))
+		var/mob/living/animal = L
+		if(animal.health < animal.maxHealth)
+			animal.adjustHealth(-3.5)
 			force_particle = TRUE
 			if(prob(50)) // Animals are simpler
 				heal_points--
@@ -464,12 +466,12 @@
 	ADD_TRAIT(owner, TRAIT_IGNOREDAMAGESLOWDOWN, id)
 	owner.adjustBruteLoss(-25)
 	owner.adjustFireLoss(-25)
-	owner.remove_CC()
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
 		H.bodytemperature = H.dna.species.body_temperature
 		if(regen_type_applied == "Legion")
 			if(is_mining_level(H.z) || istype(get_area(H), /area/ruin/space/bubblegum_arena))
+				owner.remove_CC()
 				for(var/obj/item/organ/external/E in H.bodyparts)
 					E.fix_internal_bleeding()
 					E.fix_burn_wound()

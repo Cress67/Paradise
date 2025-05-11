@@ -156,30 +156,15 @@
 	return TRUE
 
 /obj/machinery/economy/vending/coffee/do_vend(datum/data/vending_product/R, mob/user)
-	if(..())
+	var/obj/item/reagent_containers/drinks/vended = ..()
+	if(!istype(vended))
 		return
-	var/obj/item/reagent_containers/drinks/vended = new R.product_path()
 
 	if(istype(vended, /obj/item/reagent_containers/drinks/mug))
-		var/put_on_turf = TRUE
-		if(user && iscarbon(user) && user.Adjacent(src))
-			if(user.put_in_hands(vended))
-				put_on_turf = FALSE
-		if(put_on_turf)
-			var/turf/T = get_turf(src)
-			vended.forceMove(T)
 		return
 
 	vended.reagents.trans_to(inserted_item, vended.reagents.total_volume)
-	if(vended.reagents.total_volume)
-		var/put_on_turf = TRUE
-		if(user && iscarbon(user) && user.Adjacent(src))
-			if(user.put_in_hands(vended))
-				put_on_turf = FALSE
-		if(put_on_turf)
-			var/turf/T = get_turf(src)
-			vended.forceMove(T)
-	else
+	if(!vended.reagents.total_volume)
 		qdel(vended)
 
 
@@ -685,6 +670,7 @@
 					/obj/item/clothing/under/costume/pirate = 1,
 					/obj/item/clothing/suit/pirate_brown = 1,
 					/obj/item/clothing/suit/pirate_black =1,
+					/obj/item/clothing/head/cool_bandana =1,
 					/obj/item/clothing/under/costume/pirate_rags =1,
 					/obj/item/clothing/head/pirate = 1,
 					/obj/item/clothing/under/costume/soviet = 1,
@@ -704,6 +690,7 @@
 					/obj/item/clothing/under/rank/civilian/clown/sexy = 1,
 					/obj/item/clothing/mask/gas/sexymime = 1,
 					/obj/item/clothing/under/rank/civilian/mime/sexy = 1,
+					/obj/item/clothing/suit/suspenders = 1,
 					/obj/item/clothing/mask/face/bat = 1,
 					/obj/item/clothing/mask/face/bee = 1,
 					/obj/item/clothing/mask/face/bear = 1,
@@ -803,6 +790,7 @@
 				/obj/item/clothing/under/costume/pirate = 100,
 				/obj/item/clothing/suit/pirate_brown = 100,
 				/obj/item/clothing/suit/pirate_black = 100,
+				/obj/item/clothing/head/cool_bandana = 50,
 				/obj/item/clothing/under/costume/pirate_rags = 100,
 				/obj/item/clothing/head/pirate = 50,
 				/obj/item/clothing/under/costume/soviet = 100,
@@ -822,6 +810,7 @@
 				/obj/item/clothing/under/rank/civilian/clown/sexy = 100,
 				/obj/item/clothing/mask/gas/sexymime = 100,
 				/obj/item/clothing/under/rank/civilian/mime/sexy = 100,
+				/obj/item/clothing/suit/suspenders = 50,
 				/obj/item/clothing/mask/face/bat = 100,
 				/obj/item/clothing/mask/face/bee = 100,
 				/obj/item/clothing/mask/face/bear = 100,
@@ -1365,6 +1354,7 @@
 					/obj/item/stack/medical/ointment = 2,
 					/obj/item/reagent_containers/syringe/charcoal = 4,
 					/obj/item/reagent_containers/hypospray/autoinjector/epinephrine = 4,
+					/obj/item/stack/medical/splint = 2,
 					/obj/item/healthanalyzer = 1)
 
 	contraband = list(/obj/item/reagent_containers/syringe/antiviral = 4,
@@ -1394,7 +1384,8 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/economy/vending/wallmed, 32, 32)
 					/obj/item/cartridge/atmos = 10,
 					/obj/item/cartridge/janitor = 10,
 					/obj/item/cartridge/signal/toxins = 10,
-					/obj/item/cartridge/signal = 10)
+					/obj/item/cartridge/signal = 10,
+					/obj/item/cartridge/chef = 10)
 
 	contraband = list(/obj/item/cartridge/clown = 1,
 					/obj/item/cartridge/mime = 1)
@@ -1406,7 +1397,8 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/economy/vending/wallmed, 32, 32)
 				/obj/item/cartridge/atmos = 75,
 				/obj/item/cartridge/janitor = 100,
 				/obj/item/cartridge/signal/toxins = 150,
-				/obj/item/cartridge/signal = 75)
+				/obj/item/cartridge/signal = 75,
+				/obj/item/cartridge/chef = 100)
 
 	refill_canister = /obj/item/vending_refill/cart
 

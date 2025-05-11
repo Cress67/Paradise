@@ -1016,7 +1016,7 @@
 
 /obj/item/spellbook/oneuse/fireball/recoil(mob/user as mob)
 	..()
-	explosion(user.loc, -1, 0, 2, 3, 0, flame_range = 2)
+	explosion(user.loc, -1, 0, 2, 3, 0, flame_range = 2, cause = "[user]: Self-fireball from oneuse [name]")
 	qdel(src)
 
 /obj/item/spellbook/oneuse/smoke
@@ -1112,7 +1112,7 @@
 		magichead.flags |= NODROP | DROPDEL	//curses!
 		magichead.flags_inv = null	//so you can still see their face
 		magichead.voicechange = TRUE	//NEEEEIIGHH
-		if(!user.unEquip(user.wear_mask))
+		if(!user.drop_item_to_ground(user.wear_mask))
 			qdel(user.wear_mask)
 		user.equip_to_slot_if_possible(magichead, ITEM_SLOT_MASK, TRUE, TRUE)
 		qdel(src)

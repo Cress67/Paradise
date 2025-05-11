@@ -320,6 +320,11 @@
 	path = /obj/item/clothing/under/rank/civilian/hop/skirt
 	allowed_roles = list("Head of Personnel")
 
+/datum/gear/uniform/skirt/captain
+	display_name = "Skirt, captain"
+	path = /obj/item/clothing/under/rank/captain/skirt
+	allowed_roles = list("Captain")
+
 /datum/gear/uniform/skirt/job/magistrate
 	display_name = "Skirt, magistrate"
 	path = /obj/item/clothing/under/rank/procedure/magistrate/skirt
@@ -390,12 +395,12 @@
 /datum/gear/uniform/sec/secorporate
 	display_name = "Security uniform, corporate"
 	path = /obj/item/clothing/under/rank/security/officer/corporate
-	allowed_roles = list("Head of Security", "Warden", "Security Officer")
+	allowed_roles = list("Head of Security", "Warden", "Detective", "Security Officer")
 
 /datum/gear/uniform/sec/dispatch
 	display_name = "Security uniform, dispatch"
 	path = /obj/item/clothing/under/rank/security/officer/dispatch
-	allowed_roles = list("Head of Security", "Warden", "Security Officer")
+	allowed_roles = list("Head of Security", "Warden", "Detective", "Security Officer")
 
 /datum/gear/uniform/sec/casual
 	display_name = "Security uniform, casual"

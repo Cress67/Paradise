@@ -53,7 +53,7 @@
 			user.adjustBruteLoss(force)
 			user.adjustFireLoss(sanctify_force)
 			user.Weaken(10 SECONDS)
-			user.unEquip(src, 1)
+			user.drop_item_to_ground(src, force = TRUE)
 			user.visible_message("<span class='warning'>[src] slips out of the grip of [user] as they try to pick it up, bouncing upwards and smacking [user.p_them()] in the face!</span>", \
 			"<span class='warning'>[src] slips out of your grip as you pick it up, bouncing upwards and smacking you in the face!</span>")
 			playsound(get_turf(user), 'sound/effects/hit_punch.ogg', 50, TRUE, -1)
@@ -653,8 +653,10 @@
 
 /obj/item/nullrod/rosary/bread/process()
 	var/mob/living/carbon/human/holder = loc
-	//would like to make the holder mime if they have it in on thier person in general
+	// would like to make the holder mime if they have it in on their person in general
 	for(var/mob/living/carbon/human/H in range(5, loc))
+		if(!H.mind)
+			continue
 		if(H.mind.assigned_role == "Clown" && !LAZYACCESS(smited_clowns, H))
 			LAZYSET(smited_clowns, H, TRUE)
 			H.Silence(20 SECONDS)

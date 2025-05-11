@@ -102,7 +102,7 @@
 	if(!.)
 		return .
 	var/turf/T = get_turf(target)
-	explosion(T, exp_devastate, exp_heavy, exp_light, exp_flash, 0, flame_range = exp_fire)
+	explosion(T, exp_devastate, exp_heavy, exp_light, exp_flash, 0, flame_range = exp_fire, cause = name)
 	if(ismob(target)) //multiple flavors of pain
 		var/mob/living/M = target
 		M.take_overall_damage(0,10) //between this 10 burn, the 10 brute, the explosion brute, and the onfire burn, your at about 65 damage if you stop drop and roll immediately
@@ -172,8 +172,6 @@
 
 /obj/item/projectile/magic/door/on_hit(atom/target)
 	. = ..()
-	if(!.)
-		return .
 	var/atom/T = target.loc
 	if(isturf(target) && target.density)
 		if(!(istype(target, /turf/simulated/wall/indestructible)))
@@ -234,7 +232,7 @@ GLOBAL_LIST_INIT(wabbajack_docile_animals, list(
 	"cat" = /mob/living/simple_animal/pet/cat,
 	"mouse" = /mob/living/simple_animal/mouse,
 	"chicken" = /mob/living/simple_animal/chicken,
-	"cow" = /mob/living/simple_animal/cow,
+	"cow" = /mob/living/basic/cow,
 	"lizard" = /mob/living/simple_animal/lizard,
 	"fox" = /mob/living/simple_animal/pet/dog/fox,
 	"chick" = /mob/living/simple_animal/chick,
@@ -269,7 +267,7 @@ GLOBAL_LIST_INIT(wabbajack_docile_animals, list(
 				for(var/i in H.internal_organs)
 					qdel(i)
 			for(var/obj/item/W in M)
-				M.unEquip(W, 1)
+				M.unequip(W, force = TRUE)
 				qdel(W)
 
 		var/mob/living/new_mob
